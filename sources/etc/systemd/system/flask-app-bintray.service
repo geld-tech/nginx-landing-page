@@ -1,0 +1,13 @@
+[Unit]
+Description=geld.tech landing page server by Flask with Gunicorn on port 8001
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/geld/webapps/landing-page
+ExecStart=/usr/bin/gunicorn --workers 3 --bind 0.0.0.0:8001 --keep-alive 75 -m 007 application:app
+
+[Install]
+WantedBy=multi-user.target
+
