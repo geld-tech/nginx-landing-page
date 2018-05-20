@@ -21,7 +21,7 @@ before_install:
   - export BUILD_VERSION=$RELEASE_VERSION.$TRAVIS_BUILD_NUMBER
   - export BUILD_DATE=$(date "+%Y%m%d")
   - export PACKAGE_VERSION=$PACKAGE_NAME-$BUILD_VERSION
-  - export PACKAGE_NAME_DEB=$PACKAGE_VERSION.deb
+  - export PACKAGE_VERSION_DEB=$PACKAGE_VERSION.deb
 
 script:
   # Create the package direectories structure
