@@ -34,5 +34,5 @@ The following environment variables need to be configured in the Travis CI setti
 ```
 - BINTRAY_USER		Username used to upload to Bintray
 - BINTRAY_API_KEY	API Key used to upload in Bintray
-- __GA_UA_ID__		Google Analytics User ID
+- GA_UA_ID		Google Analytics User ID
 ```
