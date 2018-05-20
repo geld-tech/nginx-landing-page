@@ -24,18 +24,19 @@ before_install:
   - export PACKAGE_NAME_VERSION=$PACKAGE_NAME-$BUILD_VERSION.deb
 
 script:
+  # Create the package direectories structure
+  - mkdir $PACKAGE_VERSION_DIR
+  - cp -p -r sources/ $PACKAGE_VERSION_DIR
+  - cp -p -r DEBIAN/ $PACKAGE_VERSION_DIR
   # Replace version and build number with the Debian control file
-  - sed -i "s/__PACKAGE_NAME__/$PACKAGE_NAME/g" $PACKAGE_NAME/DEBIAN/control
-  - sed -i "s/__PACKAGE_DESC__/$PACKAGE_DESC/g" $PACKAGE_NAME/DEBIAN/control
-  - sed -i "s/__VERSION__/$BUILD_VERSION/g" $PACKAGE_NAME/DEBIAN/control
-  - sed -i "s/__USER__/$BINTRAY_USER/g" $PACKAGE_NAME/DEBIAN/control
-  - sed -i "s/__DATE__/$BUILD_DATE/g" $PACKAGE_NAME/DEBIAN/control
+  - sed -i "s/__PACKAGE_NAME__/$PACKAGE_NAME/g" $PACKAGE_VERSION_DIR/DEBIAN/control
+  - sed -i "s/__PACKAGE_DESC__/$PACKAGE_DESC/g" $PACKAGE_VERSION_DIR/DEBIAN/control
+  - sed -i "s/__VERSION__/$BUILD_VERSION/g" $PACKAGE_VERSION_DIR/DEBIAN/control
+  - sed -i "s/__USER__/$BINTRAY_USER/g" $PACKAGE_VERSION_DIR/DEBIAN/control
+  - sed -i "s/__DATE__/$BUILD_DATE/g" $PACKAGE_VERSION_DIR/DEBIAN/control
   # Replace Google Analytics agent ID
   - find . -type f -exec sed -i.bak "s/__GA_UA_ID__/$GA_UA_ID/g" {} \;
   # Create the Debian package
-  - mdkir $PACKAGE_VERSION_DIR
-  - cp -p -r sources/ $PACKAGE_VERSION_DIR
-  - cp -p -r DEBIAN/ $PACKAGE_VERSION_DIR
   - dpkg-deb --build $PACKAGE_NAME_VERSION
 
 after_success:
