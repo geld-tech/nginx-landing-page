@@ -3,4 +3,4 @@ Version: __VERSION__
 Depends: bash, python, python-flask, gunicorn
 Architecture: all
 Maintainer: __USER__
-Description: Python Flask web application serving the gled.tech landing page in a Debian .deb package using Travis and upload to Bintray (Build date: __DATE__)
+Description: __PACKAGE_DESC__ (build date: __DATE__)

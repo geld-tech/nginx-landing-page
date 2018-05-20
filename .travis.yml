@@ -10,8 +10,10 @@
 env:
   global:
   - PACKAGE_NAME=geldtech-landing-page
+  - PACKAGE_DESC=Python Flask web application serving geld.tech landing package as a Debian package built and deployed completely automatically
   - BINTRAY_REPO_NAME=debian
   - BINTRAY_LICENSE=Apache-2.0
+  - BINTRAY_DESCRIPTOR=bintray-descriptor.json.in
 
 before_install:
   # Export variables containing versions and filename
@@ -24,6 +26,7 @@ before_install:
 script:
   # Replace version and build number with the Debian control file
   - sed -i "s/__PACKAGE_NAME__/$PACKAGE_NAME/g" $PACKAGE_NAME/DEBIAN/control
+  - sed -i "s/__PACKAGE_DESC__/$PACKAGE_DESC/g" $PACKAGE_NAME/DEBIAN/control
   - sed -i "s/__VERSION__/$BUILD_VERSION/g" $PACKAGE_NAME/DEBIAN/control
   - sed -i "s/__USER__/$BINTRAY_USER/g" $PACKAGE_NAME/DEBIAN/control
   - sed -i "s/__DATE__/$BUILD_DATE/g" $PACKAGE_NAME/DEBIAN/control
@@ -45,19 +48,20 @@ after_success:
 
 before_deploy:
   # Set the packages name and details in the descriptor file
-  - sed -i "s/__NAME__/$PACKAGE_NAME/g" bintray-descriptor.json
-  - sed -i "s/__REPO_NAME__/$BINTRAY_REPO_NAME/g" bintray-descriptor.json
-  - sed -i "s/__SUBJECT__/$BINTRAY_USER/g" bintray-descriptor.json
-  - sed -i "s/__LICENSE__/$BINTRAY_LICENSE/g" bintray-descriptor.json
-  - sed -i "s/__VERSION__/$BUILD_VERSION/g" bintray-descriptor.json
+  - sed -i "s/__NAME__/$PACKAGE_NAME/g" $BINTRAY_DESCRIPTOR
+  - sed -i "s/__REPO_NAME__/$BINTRAY_REPO_NAME/g" $BINTRAY_DESCRIPTOR
+  - sed -i "s/__SUBJECT__/$BINTRAY_USER/g" $BINTRAY_DESCRIPTOR
+  - sed -i "s/__LICENSE__/$BINTRAY_LICENSE/g" $BINTRAY_DESCRIPTOR
+  - sed -i "s/__VERSION__/$BUILD_VERSION/g" $BINTRAY_DESCRIPTOR
+  - sed -i "s/__PACKAGE_DESC__/$PACKAGE_DESC/g" $BINTRAY_DESCRIPTOR
 
 deploy:
   # Upload debian packages to Bintray
   provider: bintray
-  file: bintray-descriptor.json
+  skip_cleanup: true
+  file: $BINTRAY_DESCRIPTOR
   user: $BINTRAY_USER
   key: $BINTRAY_API_KEY
-  skip_cleanup: true
 
 after_deploy:
   # Add time delay to let the servers process the uploaded files

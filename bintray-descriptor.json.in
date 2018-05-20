@@ -13,7 +13,7 @@
 
 	"licenses": ["__LICENSE__"],
 
-	"desc": "Debian package built and deployed completely automatically",
+	"desc": "__PACKAGE_DESC__",
 
 	"files": [
 		{
