@@ -1,4 +1,4 @@
-# geldtech-landing-page[![Build Status](https://travis-ci.org/zlig/geldtech-landing-page.svg?branch=master)](https://travis-ci.org/zlig/geldtech-landing-page)  [ ![Download](https://api.bintray.com/packages/geld.tech/debian/geldtech-landing-page/images/download.svg) ](https://bintray.com/geld.tech/debian/geldtech-landing-pages#files)
+# geldtech-landing-page[![Build Status](https://travis-ci.org/geld-tech/geldtech-landing-page.svg?branch=master)](https://travis-ci.org/igeld-tech/geldtech-landing-page)  [ ![Download](https://api.bintray.com/packages/geldtech/debian/geldtech-landing-page/images/download.svg) ](https://bintray.com/geldtech/debian/geldtech-landing-pages#files)
 
 
 ## Description
@@ -34,5 +34,6 @@ The following environment variables need to be configured in the Travis CI setti
 ```
 - BINTRAY_USER		Username used to upload to Bintray
 - BINTRAY_API_KEY	API Key used to upload in Bintray
+- BINTRAY_SUBJECT	User or organisation used to upload in Bintray
 - GA_UA_ID		Google Analytics User ID
 ```

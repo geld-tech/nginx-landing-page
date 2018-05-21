@@ -11,7 +11,6 @@ env:
   global:
   - PACKAGE_NAME=geldtech-landing-page
   - PACKAGE_DESC=Python Flask web application serving geld.tech landing package as a Debian package built and deployed completely automatically
-  - BINTRAY_ORG=geldtech
   - BINTRAY_REPO_NAME=debian
   - BINTRAY_LICENSE=Apache-2.0
   - BINTRAY_DESCRIPTOR=bintray-descriptor.json.in
@@ -52,7 +51,7 @@ before_deploy:
   # Set the packages name and details in the descriptor file
   - sed -i "s/__NAME__/$PACKAGE_NAME/g" $BINTRAY_DESCRIPTOR
   - sed -i "s/__REPO_NAME__/$BINTRAY_REPO_NAME/g" $BINTRAY_DESCRIPTOR
-  - sed -i "s/__SUBJECT__/$BINTRAY_ORG/g" $BINTRAY_DESCRIPTOR
+  - sed -i "s/__SUBJECT__/$BINTRAY_SUBJECT/g" $BINTRAY_DESCRIPTOR
   - sed -i "s/__LICENSE__/$BINTRAY_LICENSE/g" $BINTRAY_DESCRIPTOR
   - sed -i "s/__VERSION__/$BUILD_VERSION/g" $BINTRAY_DESCRIPTOR
   - sed -i "s/__PACKAGE_DESC__/$PACKAGE_DESC/g" $BINTRAY_DESCRIPTOR
@@ -70,7 +69,7 @@ after_deploy:
   # Add time delay to let the servers process the uploaded files
   - sleep 180
   # Retrieve SHA256 sum and compare with local sum to ensure correct file uploaded
-  - export REMOTE_SHA256=$(curl -L -v --silent https://bintray.com/$BINTRAY_ORG/$BINTRAY_REPO_NAME/download_file?file_path=Packages.gz | zcat | grep -A 3 $PACKAGE_VERSION_DEB | grep SHA256 | cut -d " " -f2)
+  - export REMOTE_SHA256=$(curl -L -v --silent https://bintray.com/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME/download_file?file_path=Packages.gz | zcat | grep -A 3 $PACKAGE_VERSION_DEB | grep SHA256 | cut -d " " -f2)
   - echo "REMOTE_SHA256: $REMOTE_SHA256"
   - >
     if [[ "$LOCAL_SHA256" != "$REMOTE_SHA256" ]]; then
