@@ -35,17 +35,18 @@ script:
   - sed -i "s/__USER__/$BINTRAY_USER/g" $PACKAGE_VERSION/DEBIAN/control
   - sed -i "s/__DATE__/$BUILD_DATE/g" $PACKAGE_VERSION/DEBIAN/control
   # Replace Google Analytics agent ID
-  - find $PACKAGE_VERSION -type f -exec sed -i.bak "s/__GA_UA_ID__/$GA_UA_ID/g" {} \;
+  - find $PACKAGE_VERSION -type f -exec sed -i "s/__GA_UA_ID__/$GA_UA_ID/g" {} \;
   # Create the Debian package
   - dpkg-deb --build $PACKAGE_VERSION
 
 after_success:
+  # Stores hashes of created package to ensure upload successful
+  - export LOCAL_SHA256=$( sha256sum $PACKAGE_VERSION_DEB | cut -d " " -f1 )
   # Output detail on the resulting package for debugging purpose
   - ls -l $PACKAGE_VERSION
   - dpkg --contents $PACKAGE_VERSION_DEB
   - md5sum $PACKAGE_VERSION_DEB
   - sha256sum $PACKAGE_VERSION_DEB
-  - export LOCAL_SHA256=$( sha256sum $PACKAGE_VERSION_DEB | cut -d " " -f1 )
 
 before_deploy:
   # Set the packages name and details in the descriptor file
