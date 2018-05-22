@@ -26,7 +26,7 @@ before_install:
 script:
   # Create the package direectories structure
   - mkdir $PACKAGE_VERSION
-  - cp -p -r sources/ $PACKAGE_VERSION
+  - cp -p -r sources/* $PACKAGE_VERSION
   - cp -p -r DEBIAN/ $PACKAGE_VERSION
   # Replace version and build number with the Debian control file
   - sed -i "s/__PACKAGE_NAME__/$PACKAGE_NAME/g" $PACKAGE_VERSION/DEBIAN/control
