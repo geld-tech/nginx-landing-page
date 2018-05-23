@@ -1,4 +1,25 @@
 #!/bin/sh
 set -e
 
-echo "Pre-Installation Macro"
+echo "Post-Installation Macro"
+
+IS_UPGRADE=false
+
+case "$1" in
+	configure)
+		# Set user permissions on /var/log/grafana, /var/lib/grafana
+		mkdir -p /opt/geld/webapps/geldtech-landing-page
+		chown -R root:root /opt/geld/webapps/geldtech-landing-page
+		chmod -R 755 /opt/geld/webapps/geldtech-landing-page
+		# If $1=configure and $2 is set, this is an upgrade
+		if [ "$2" != "" ]; then
+			IS_UPGRADE=true
+		fi
+		if [ "$IS_UPGRADE" = "true" ]; then
+			echo -n "Restarting service..."
+			systemctl daemon-reload
+			systemctl restart geldtech-landing-page || true
+		echo " OK"
+		fi
+		;;
+esac
