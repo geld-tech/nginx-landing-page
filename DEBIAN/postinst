@@ -19,7 +19,13 @@ case "$1" in
 			echo -n "Restarting service..."
 			systemctl daemon-reload
 			systemctl restart geldtech-landing-page || true
-		echo " OK"
+			echo " OK"
+		else
+			echo -n "Starting service..."
+			systemctl daemon-reload
+			systemctl start geldtech-landing-page || true
+			echo " OK"
+			
 		fi
 		;;
 esac
