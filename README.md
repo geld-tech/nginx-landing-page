@@ -3,7 +3,7 @@
 
 ## Description
 
-Landing page for the projects hosted on <a href="http://www.gedl.tech">geld.tech</a>
+Landing page for the projects hosted on <a href="http://www.geld.tech">geld.tech</a>
 
 
 ## Usage
