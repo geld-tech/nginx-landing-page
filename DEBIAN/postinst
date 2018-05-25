@@ -23,9 +23,9 @@ case "$1" in
 		else
 			echo -n "Starting service..."
 			systemctl daemon-reload
+			systemctl enable geldtech-landing-page || true
 			systemctl start geldtech-landing-page || true
 			echo " OK"
-			
 		fi
 		;;
 esac
