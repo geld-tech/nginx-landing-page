@@ -20,11 +20,17 @@ case "$1" in
 			systemctl daemon-reload
 			systemctl restart geldtech-landing-page || true
 			echo " OK"
+			echo -n "Reloading nginx service..."
+			sudo service nginx reload
+			echo " OK"
 		else
 			echo -n "Starting service..."
 			systemctl daemon-reload
 			systemctl enable geldtech-landing-page || true
 			systemctl start geldtech-landing-page || true
+			echo " OK"
+			echo -n "Reloading nginx service..."
+			sudo service nginx reload
 			echo " OK"
 		fi
 		;;
