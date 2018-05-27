@@ -2,8 +2,9 @@
 
 ## Status
 
-[![Build Status](https://travis-ci.org/geld-tech/geldtech-landing-page.svg?branch=master)](https://travis-ci.org/geld-tech/geldtech-landing-page) [ ![Download](https://api.bintray.com/packages/geldtech/debian/geldtech-landing-page/images/download.svg)](https://bintray.com/geldtech/debian/geldtech-landing-page#files)
-
+[ ![Download](https://api.bintray.com/packages/geldtech/debian/geldtech-landing-page/images/download.svg)](https://bintray.com/geldtech/debian/geldtech-landing-page#files)
+[![Build Status](https://travis-ci.org/geld-tech/geldtech-landing-page.svg?branch=master)](https://travis-ci.org/geld-tech/geldtech-landing-page) 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Description
 
