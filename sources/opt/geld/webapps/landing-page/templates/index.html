@@ -8,7 +8,7 @@
     <meta name="description" content="__DESC__">
     <meta name="author" content="__AUTHOR__">
 
-    <title>geld.tech</title>
+    <title>{{ page_title }}</title>
 
     <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/3-col-portfolio.css') }}" rel="stylesheet">
@@ -20,7 +20,10 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">geld.tech</a>
+        <a class="navbar-brand" href="#">
+          <img src="{{ url_for('static', filename='images/geld.tech_192x192.png') }}" />
+          {{ page_title }}
+        </a>
       </div>
     </nav>
 
@@ -30,10 +33,10 @@
       <!-- Page Heading -->
       <h1 class="my-3">
         <small>
-	    {% if name %}
-		<h1 style='color:black'>Hello, {{name}}</h1>
+	    {% if section %}
+		<h1 style='color:black'>{{ page_title }} - {{ section }}</h1>
 	    {% else %}
-		<h1 style='color:blue'>geld.tech</h1>
+		<h1 style='color:blue'>{{ page_title }}</h1>
 	    {% endif %}
         </small>
       </h1>
