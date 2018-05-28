@@ -34,6 +34,20 @@ def parse_nginx_config_files(directory):
 	return locations
 
 
+def take_screenshot(url, filename="screenshot.png"):
+	browser = None
+	try:
+		chromium_webdriver_path = r"/usr/lib/chromium-browser/chromedriver"
+		chrome_options = Options()
+		chrome_options.add_argument("--headless")
+		browser = webdriver.Chrome(executable_path=chromium_webdriver_path,
+					 chrome_options=chrome_options)
+		browser.get(url)
+		screenshot = browser.save_screenshot(filename)
+	finally:
+		if browser:
+			browser.quit()
+
 # Flask App and Routes
 
 @app.route("/")
