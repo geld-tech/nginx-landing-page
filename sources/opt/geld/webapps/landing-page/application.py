@@ -4,7 +4,7 @@ from flask import Flask, render_template
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from nginxparser import load
+from dependencies.nginxparser import load
 
 # Globals
 app = Flask(__name__)
