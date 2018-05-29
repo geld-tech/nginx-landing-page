@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 import glob
 from flask import Flask, render_template
-from dependencies.nginxparser import load
+
+sys.path.append('/opt/geld/webapps/landing-page/dependencies')
+from nginxparser import load
 
 # Globals
 app = Flask(__name__)
@@ -19,7 +21,7 @@ def parse_config(input, data):
 			data[input[0]] = input[1]
 	else:
 		for item in input:
-		parse_config(item, data)
+			parse_config(item, data)
 
 
 def parse_nginx_config_files(directory):
