@@ -42,6 +42,7 @@ script:
 after_success:
   # Stores hashes of created package to ensure upload successful
   - export LOCAL_SHA256=$( sha256sum $PACKAGE_VERSION_DEB | cut -d " " -f1 )
+  - 'echo "LOCAL_SHA256=$LOCAL_SHA256"'
   # Output detail on the resulting package for debugging purpose
   - ls -l $PACKAGE_VERSION
   - dpkg --contents $PACKAGE_VERSION_DEB
@@ -71,10 +72,10 @@ after_deploy:
   - sleep 180
   # Retrieve SHA256 sum and compare with local sum to ensure correct file uploaded
   - export REMOTE_SHA256=$(curl -L -v --silent https://bintray.com/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME/download_file?file_path=Packages.gz | zcat | grep -A 3 $PACKAGE_VERSION_DEB | grep SHA256 | cut -d" " -f2)
-  - echo "REMOTE_SHA256: $REMOTE_SHA256"
+  - 'echo "REMOTE_SHA256: $REMOTE_SHA256"'
   - >
     if [[ "$LOCAL_SHA256" != "$REMOTE_SHA256" ]]; then
-      echo "SHA256 sums don't match: $LOCAL_SHA256 vs $REMOTE_SHA256"
+      echo "SHA256 sums don't match: $LOCAL_SHA256 vs $REMOTE_SHA256";
       travis_terminate 1;
     fi
   # Place link to the file in download list
@@ -84,11 +85,11 @@ after_deploy:
     -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/file_metadata/$BINTRAY_USER/$BINTRAY_REPO_NAME/$PACKAGE_VERSION_DEB
   # Retrieve releases list and delete old ones
   - export OLD_RELEASES=$(curl -L -v --silent https://bintray.com/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME/download_file?file_path=Packages.gz | zcat | grep -A 6 "Package: $PACKAGE_NAME" | grep Version | cut -d" " -f2 | sort -V | head -n -5)
-  - echo "OLD_RELEASES: $OLD_RELEASES"
+  - 'echo "OLD_RELEASES: $OLD_RELEASES"'
   - >
     for RELEASE_NUM in $OLD_RELEASES; do
       echo "Sending API request to delete $PACKAGE_NAME version $RELEASE_NUM"
       curl --silent --show-error --fail -X DELETE -u$BINTRAY_USER:$BINTRAY_API_KEY\
-      https://api.bintray.com/packages/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME/$PACKAGE_NAME/$RELEASE_NUM
-      sleep 5
+      https://api.bintray.com/packages/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME/$PACKAGE_NAME/$RELEASE_NUM;
+      sleep 5;
     done
