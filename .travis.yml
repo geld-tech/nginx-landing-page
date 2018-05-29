@@ -82,8 +82,14 @@ after_deploy:
     curl --silent --show-error --fail\
     -X PUT -H "Content-Type: application/json" -d'{"list_in_downloads": true}'\
     -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/file_metadata/$BINTRAY_USER/$BINTRAY_REPO_NAME/$PACKAGE_VERSION_DEB
+  # Place link to the file in download list
+  - |
+    curl --silent --show-error --fail\
+    -X PUT -H "Content-Type: application/json" -d'{"list_in_downloads": true}'\
+    -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/file_metadata/$BINTRAY_USER/$BINTRAY_REPO_NAME/$PACKAGE_VERSION_DEB
   # Retrieve releases list and delete old ones
-  - export OLD_RELEASES=$(curl -L -v --silent https://bintray.com/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME/download_file?file_path=Packages.gz | zcat | grep -A 6 "Package: $PACKAGE_NAME" | grep Version | cut -d " " -f 2 | sort -V | head -n -6)
+  - export OLD_RELEASES=$(curl -L -v --silent https://bintray.com/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME/download_file?file_path=Packages.gz | zcat | grep -A 6 "Package: "$PACKAGE_NAME | grep Version | cut -d " " -f2 | sort -V | head -n -5)
+  - echo "OLD_RELEASES: $OLD_RELEASES"
   - >
     for RELEASE_NUM in $OLD_RELEASES; do
       echo "Sending API request to delete $PACKAGE_NAME version $RELEASE_NUM"
