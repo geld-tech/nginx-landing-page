@@ -7,7 +7,7 @@ IS_UPGRADE=false
 
 case "$1" in
 	configure)
-		# Set user permissions on /var/log/grafana, /var/lib/grafana
+		# Set user permissions on /opt/geld/webapps/geldtech-landing-page
 		mkdir -p /opt/geld/webapps/geldtech-landing-page
 		chown -R root:root /opt/geld/webapps/geldtech-landing-page
 		chmod -R 755 /opt/geld/webapps/geldtech-landing-page
