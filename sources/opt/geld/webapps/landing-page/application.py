@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-import glob
+import glob, sys
 from flask import Flask, render_template
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
-sys.path.append('/opt/geld/webapps/landing-page/dependencies')
 from nginxparser import load
 
 # Globals
@@ -38,6 +39,7 @@ def parse_nginx_config_files(directory):
 
 def take_screenshot(url, filename="screenshot.png"):
 	browser = None
+	rc = False
 	try:
 		chromium_webdriver_path = r"/usr/lib/chromium-browser/chromedriver"
 		chrome_options = Options()
@@ -45,10 +47,11 @@ def take_screenshot(url, filename="screenshot.png"):
 		browser = webdriver.Chrome(executable_path=chromium_webdriver_path,
 					 chrome_options=chrome_options)
 		browser.get(url)
-		screenshot = browser.save_screenshot(filename)
+		rc = browser.save_screenshot(filename)
 	finally:
 		if browser:
 			browser.quit()
+		return rc
 
 # Flask App and Routes
 
