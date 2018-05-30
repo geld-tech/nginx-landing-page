@@ -68,8 +68,20 @@ deploy:
   dry_run: false
 
 after_deploy:
-  # Add time delay to let the servers process the uploaded files
-  - sleep 180
+  # Retrieve releases list and delete old packages files
+  - sleep 60
+  - 'export OLD_RELEASES=$(curl -L -v --silent https://bintray.com/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME/download_file?file_path=Packages.gz | zcat | grep -A 6 "Package: $PACKAGE_NAME" | grep Version | cut -d" " -f2 | sort -V | head -n -5)'
+  - 'echo "OLD_RELEASES: $OLD_RELEASES"'
+  - >
+    for RELEASE_NUM in $OLD_RELEASES; do
+      echo "Sending API request to delete $PACKAGE_NAME version $RELEASE_NUM" ;
+      curl --silent --show-error --fail -X DELETE -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/content/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME/$PACKAGE_NAME-$RELEASE_NUM.deb ;
+      curl --silent --show-error --fail -X DELETE -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/content/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME/$PACKAGE_NAME-$RELEASE_NUM.deb.asc ;
+      sleep 5 ;
+    done
+  
+  # Add time delay to let the servers process the uploaded new version and delete old files
+  - sleep 120
   
   # Retrieve SHA256 sum and compare with local sum to ensure correct file uploaded
   - export REMOTE_SHA256=$(curl -L -v --silent https://bintray.com/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME/download_file?file_path=Packages.gz | zcat | grep -A 3 $PACKAGE_VERSION_DEB | grep SHA256 | cut -d" " -f2)
@@ -81,18 +93,5 @@ after_deploy:
     fi
 
   # Place link to the file in download list
-  - |
-    curl --silent --show-error --fail\
-    -X PUT -H "Content-Type: application/json" -d'{"list_in_downloads": true}'\
-    -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/file_metadata/$BINTRAY_USER/$BINTRAY_REPO_NAME/$PACKAGE_VERSION_DEB
-
-  # Retrieve releases list and delete old ones
-  - 'export OLD_RELEASES=$(curl -L -v --silent https://bintray.com/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME/download_file?file_path=Packages.gz | zcat | grep -A 6 "Package: $PACKAGE_NAME" | grep Version | cut -d" " -f2 | sort -V | head -n -5)'
-  - 'echo "OLD_RELEASES: $OLD_RELEASES"'
   - >
-    for RELEASE_NUM in $OLD_RELEASES; do
-      echo "Sending API request to delete $PACKAGE_NAME version $RELEASE_NUM" ;
-      curl --silent --show-error --fail -X DELETE -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/content/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME/$PACKAGE_NAME-$RELEASE_NUM.deb ;
-      curl --silent --show-error --fail -X DELETE -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/content/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME/$PACKAGE_NAME-$RELEASE_NUM.deb.asc ;
-      sleep 5 ;
-    done
+    curl --silent --show-error --fail -X PUT -H "Content-Type: application/json" -d'{"list_in_downloads": true}' -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/file_metadata/$BINTRAY_USER/$BINTRAY_REPO_NAME/$PACKAGE_VERSION_DEB
