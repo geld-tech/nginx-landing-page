@@ -94,4 +94,4 @@ after_deploy:
 
   # Place link to the file in download list
   - >
-    curl --silent --show-error --fail -X PUT -H "Content-Type: application/json" -d'{"list_in_downloads": true}' -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/file_metadata/$BINTRAY_USER/$BINTRAY_REPO_NAME/$PACKAGE_VERSION_DEB
+    curl --silent --show-error --fail -X PUT -H "Content-Type: application/json" -d'{"list_in_downloads": true}' -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/file_metadata/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME/$PACKAGE_NAME-$RELEASE_NUM.deb
