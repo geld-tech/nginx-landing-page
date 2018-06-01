@@ -5,6 +5,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 from dependencies.nginxparser import load
+import dependencies.nginxconfigparser
+import dependencies.screenshotgenerator
 
 # Globals
 app = Flask(__name__)
@@ -52,6 +54,24 @@ def take_screenshot(url, filename="screenshot.png"):
 		if browser:
 			browser.quit()
 		return rc
+
+def generate_screenshots(data, file_prefix="screenshot", dir_path="/tmp"):                     
+    increment = 1
+    for location in data:
+        file_path = "%s/%s%s.png" % (dir_path, file_prefix, increment)                         
+        success = take_screenshot(data[location], file_path)                                   
+        increment += 1
+        if not success:
+            print "Could not create %s" % file_path                                            
+            return False                                                                       
+
+def generate_screenshots_from_nginxconfig():
+    locations = parse_nginx_config_files(NGINX_CONFD_FILES)
+    dir_path = os.path.dirname(os.path.realpath(__file__))+"/static/images/"                   
+    if not os.path.exists(dir_path):                                                           
+        os.makedirs(dir_path)
+    generate_screenshots(locations, file_prefix="project_", dir_path=dir_path) 
+
 
 # Flask App and Routes
 
