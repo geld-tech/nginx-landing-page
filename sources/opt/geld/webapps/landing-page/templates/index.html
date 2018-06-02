@@ -13,6 +13,10 @@
     <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/3-col-portfolio.css') }}" rel="stylesheet">
 
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/geld.tech_180x180.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/geld.tech_192x192.png') }}" sizes="192x192">
+
   </head>
 
   <body>
@@ -21,7 +25,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
       <div class="container">
         <a class="navbar-brand" href="#">
-          <img src="{{ url_for('static', filename='images/geld.tech_192x192.png') }}" width="30" height="30" alt="" />
+          <img src="{{ url_for('static', filename='images/geld.tech_32x32.png') }}" width="30" height="30" alt="" />
           {{ page_title }}
         </a>
       </div>
