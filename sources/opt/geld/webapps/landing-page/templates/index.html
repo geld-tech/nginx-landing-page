@@ -48,6 +48,20 @@
       </h1>
 
       <div class="row">
+        {% for website in data %}
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="{{ website.location }}"><img class="card-img-top" src="{{ url_for('static', filename='data/'+website.screenshot ) }}" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project</a>
+              </h4>
+              <p class="card-text">Description</p>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <!-- stub data if no projects found or not loaded yet -->
         <div class="col-lg-4 col-sm-6 portfolio-item">
           <div class="card h-100">
             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
@@ -114,6 +128,7 @@
             </div>
           </div>
         </div>
+        {% endfor %}
       </div>
       <!-- /.row -->
 
