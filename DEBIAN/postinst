@@ -13,6 +13,7 @@ case "$1" in
 		chown -R root:www-data /opt/geld/webapps/landing-page
 		find /opt/geld/webapps/landing-page -type d -print0 | xargs -0 chmod 755
 		find /opt/geld/webapps/landing-page -type f -print0 | xargs -0 chmod 644
+		chmod 775 /opt/geld/webapps/landing-page/static/data
 		
 		# If $1=configure and $2 is set, this is an upgrade
 		if [ "$2" != "" ]; then
