@@ -36,6 +36,7 @@ script:
   - sed -i "s/__DATE__/$BUILD_DATE/g" $PACKAGE_VERSION/DEBIAN/control
   # Replace Google Analytics agent ID
   - find $PACKAGE_VERSION -type f -exec sed -i "s/__GA_UA_ID__/$GA_UA_ID/g" {} \;
+  - find $PACKAGE_VERSION -type f -exec sed -i "s/__PACKAGE_DESC__/$PACKAGE_DESC/g" {} \;
   # Create the Debian package
   - dpkg-deb --build $PACKAGE_VERSION
 

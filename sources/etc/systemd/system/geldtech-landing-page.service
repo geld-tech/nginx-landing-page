@@ -1,5 +1,5 @@
 [Unit]
-Description=__DESC__
+Description=__PACKAGE_DESC__
 After=network.target
 
 [Service]
