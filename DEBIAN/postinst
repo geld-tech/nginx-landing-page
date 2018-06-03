@@ -7,10 +7,10 @@ IS_UPGRADE=false
 
 case "$1" in
 	configure)
-		# Set user permissions on /opt/geld/webapps/geldtech-landing-page
-		mkdir -p /opt/geld/webapps/geldtech-landing-page
-		chown -R root:root /opt/geld/webapps/geldtech-landing-page
-		chmod -R 755 /opt/geld/webapps/geldtech-landing-page
+		# Set user permissions on /opt/geld/webapps/landing-page
+		mkdir -p /opt/geld/webapps/landing-page
+		chown -R root:root /opt/geld/webapps/landing-page
+		chmod -R 755 /opt/geld/webapps/landing-page
 		# If $1=configure and $2 is set, this is an upgrade
 		if [ "$2" != "" ]; then
 			IS_UPGRADE=true
