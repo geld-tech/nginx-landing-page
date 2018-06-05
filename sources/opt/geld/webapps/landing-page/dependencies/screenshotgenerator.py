@@ -13,6 +13,7 @@ def take_screenshot(url, filename="screenshot.png", width="1024", height="768"):
         chrome_options = Options()
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--hide-scrollbars")
         chrome_options.add_argument("window-size=%s,%s" % (width, height))
         browser = webdriver.Chrome(executable_path=chromium_webdriver_path,
                                 chrome_options=chrome_options)
@@ -35,10 +36,7 @@ def generate_screenshots(data, file_prefix="screenshot", file_ext="png", dir_pat
         success, title, description = take_screenshot(data[location], dir_path+"/"+file_path)
         increment += 1
         if success:
-            screenshots.append({"title": title,
-                            "description": description,
-                            "url": location,
-                            "screenshot": file_path})
+            screenshots.append({"title": title, "description": description, "url": location, "screenshot": file_path})
         else:
             print "Could not create %s" % file_path
     return screenshots
