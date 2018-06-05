@@ -34,8 +34,9 @@ app.debug=True
 @app.route("/<section>")
 def index(section=None):
 	page_title="__PACKAGE_NAME__"
+	page_domain="__PACKAGE_DOMAIN__"
 	data=load_websites_data(DATA_JSON)
-	return render_template('index.html', page_title=page_title, section=section, data=data)
+	return render_template('index.html', page_title=page_title, page_domain=page_domain, section=section, data=data)
 
 @app.errorhandler(404)
 def page_not_found(e):
