@@ -10,6 +10,15 @@
 
     <title>{{ page_title }}</title>
 
+    <meta property="og:type" content= "website" />
+    <meta property="og:url" content="{{ request.path }}"/>
+    <meta property="og:site_name" content="{{ page_title }}" />
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="{{ url_for('static', filename='images/geld.tech_128x128.png') }}" />
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:domain" content="{{ page_title }}"/>
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="{{ page_title }}" />
+    <meta name="twitter:description" property="og:description" itemprop="description" content=" __DESC__" />
+
     <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/3-col-portfolio.css') }}" rel="stylesheet">
 
