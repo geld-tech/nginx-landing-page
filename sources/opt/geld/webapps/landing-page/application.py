@@ -35,7 +35,7 @@ app.debug=True
 def index(section=None):
 	page_title="geld.tech"
 	data=load_websites_data(DATA_JSON)
-	return render_template('index.html', title=page_title, section=section, data=data)
+	return render_template('index.html', page_title=page_title, section=section, data=data)
 
 @app.errorhandler(404)
 def page_not_found(e):
