@@ -37,7 +37,7 @@
       <div class="container">
         <a class="navbar-brand" href="#">
           <img src="{{ url_for('static', filename='images/geld.tech_32x32.png') }}" width="30" height="30" alt="" />
-          {{ request.host }}
+          {{ page_domain }}
         </a>
       </div>
     </nav>
@@ -141,7 +141,7 @@
     <!-- Footer -->
     <footer class="py-1 bg-white">
       <div class="container">
-        <p class="m-0 text-center">copyright &copy; geld.tech 2018</p>
+        <p class="m-0 text-center">copyright &copy; {{ page_domain }} 2018</p>
       </div>
       <!-- /.container -->
     </footer>
