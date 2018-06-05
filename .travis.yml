@@ -10,7 +10,7 @@
 env:
   global:
   - PACKAGE_NAME=geldtech-landing-page
-  - PACKAGE_DESC=Python Flask web application serving geld.tech landing package as a Debian package built and deployed completely automatically
+  - PACKAGE_DESC="Python Flask web application serving geld.tech landing package as a Debian package built and deployed completely automatically"
   - BINTRAY_REPO_NAME=debian
   - BINTRAY_LICENSE=Apache-2.0
   - BINTRAY_DESCRIPTOR=bintray-descriptor.json.in
