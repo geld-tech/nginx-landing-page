@@ -33,7 +33,7 @@ app.debug=True
 @app.route("/")
 @app.route("/<section>")
 def index(section=None):
-	page_title="geld.tech"
+	page_title="__PACKAGE_DESC__"
 	data=load_websites_data(DATA_JSON)
 	return render_template('index.html', page_title=page_title, section=section, data=data)
 

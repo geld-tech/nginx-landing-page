@@ -5,7 +5,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="__DESC__">
+    <meta name="description" content="__PACKAGE_DESC__">
     <meta name="author" content="__AUTHOR__">
 
     <title>{{ page_title }}</title>
@@ -17,7 +17,7 @@
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:domain" content="{{ page_title }}"/>
     <meta name="twitter:title" property="og:title" itemprop="title name" content="{{ page_title }}" />
-    <meta name="twitter:description" property="og:description" itemprop="description" content=" __DESC__" />
+    <meta name="twitter:description" property="og:description" itemprop="description" content=" __PACKAGE_DESC__" />
 
     <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/3-col-portfolio.css') }}" rel="stylesheet">
@@ -47,13 +47,7 @@
 
       <!-- Page Heading -->
       <h1 class="my-3">
-        <small>
-	    {% if section %}
-		<h1 style='color:black'>{{ page_title }} - {{ section }}</h1>
-	    {% else %}
-		<h1 style='color:blue'>{{ page_title }}</h1>
-	    {% endif %}
-        </small>
+        <small>Available projects</small>
       </h1>
 
       <div class="row">
