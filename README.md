@@ -17,7 +17,7 @@ The information is retrieved using Python Selenium and served with Flask.
 
 ## Demo
 
-A sample demo of the project is hosted on <a href="http://www.geld.tech">geld.tech</a>.
+A sample demo of the project is hosted on <a href="http://geld.tech">geld.tech</a>.
 
 
 ## Usage
