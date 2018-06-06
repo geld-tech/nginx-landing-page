@@ -1,50 +1,9 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
 
-<html lang="en">
-<head>
+    {% block body %}
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="__PACKAGE_DESC__">
-    <meta name="author" content="{{ page_domain }}">
-
-    <title>{{ page_title }} - 404 Not Found</title>
-
-    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/3-col-portfolio.css') }}" rel="stylesheet">
-
-    <meta property="og:type" content= "website" />
-    <meta property="og:url" content="{{ request.url }}" />
-    <meta property="og:site_name" content="{{ page_title }}" />
-    <meta property="og:image" itemprop="image primaryImageOfPage" content="{{ url_for('static', filename='images/geld.tech_128x128.png') }}" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:domain" content="{{ page_domain }}" />
-    <meta name="twitter:title" property="og:title" itemprop="title name" content="{{ page_title }}" />
-    <meta name="twitter:description" property="og:description" itemprop="description" content="__PACKAGE_DESC__" />
-
-    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
-    <link href="{{ url_for('static', filename='css/3-col-portfolio.css') }}" rel="stylesheet" />
-
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" />
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/geld.tech_180x180.png') }}" />
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/geld.tech_192x192.png') }}" sizes="192x192" />
-
-</head>
-
-<body>
-
-    <h1 style='color:red'>404, Not Found!</h1>
+      <h1 style='color:red'>404, Not Found!</h1>
     
-    <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+      <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=__GA_UA_ID__"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '__GA_UA_ID__');
-    </script>
-</body>
-</html>
-
+    {% endblock %}
