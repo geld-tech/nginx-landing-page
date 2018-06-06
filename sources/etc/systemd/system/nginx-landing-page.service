@@ -5,10 +5,10 @@ After=network.target
 [Service]
 User=www-data
 Group=www-data
-WorkingDirectory=/opt/geld/webapps/landing-page
-ExecStartPre=-/usr/bin/find /opt/geld/webapps/landing-page/static/data/ -type f -exec rm {} \;
+WorkingDirectory=/opt/geld/webapps/nginx-landing-page
+ExecStartPre=-/usr/bin/find /opt/geld/webapps/nginx-landing-page/static/data/ -type f -exec rm {} \;
 ExecStart=/usr/bin/gunicorn --workers 3 --bind 0.0.0.0:8001 --keep-alive 75 -m 007 application:app
-ExecStartPost=/opt/geld/webapps/landing-page/generate_data.py
+ExecStartPost=/opt/geld/webapps/nginx-landing-page/generate_data.py
 
 
 [Install]

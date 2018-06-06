@@ -8,13 +8,13 @@ IS_UPGRADE=false
 case "$1" in
 	configure)
 		# Set user permissions
-		mkdir -p /opt/geld/webapps/landing-page
-		chown -R root:www-data /opt/geld/webapps/landing-page
-		chown -R root:www-data /opt/geld/webapps/landing-page
-		find /opt/geld/webapps/landing-page -type d -print0 | xargs -0 chmod 755
-		find /opt/geld/webapps/landing-page -type f -print0 | xargs -0 chmod 644
-		chmod 775 /opt/geld/webapps/landing-page/static/data
-		chmod 755 /opt/geld/webapps/landing-page/generate_data.py
+		mkdir -p /opt/geld/webapps/nginx-landing-page
+		chown -R root:www-data /opt/geld/webapps/nginx-landing-page
+		chown -R root:www-data /opt/geld/webapps/nginx-landing-page
+		find /opt/geld/webapps/nginx-landing-page -type d -print0 | xargs -0 chmod 755
+		find /opt/geld/webapps/nginx-landing-page -type f -print0 | xargs -0 chmod 644
+		chmod 775 /opt/geld/webapps/nginx-landing-page/static/data
+		chmod 755 /opt/geld/webapps/nginx-landing-page/generate_data.py
 		
 		# If $1=configure and $2 is set, this is an upgrade
 		if [ "$2" != "" ]; then
