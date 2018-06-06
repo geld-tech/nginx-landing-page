@@ -9,6 +9,8 @@ case "$1" in
 	configure)
 		# Set user permissions
 		mkdir -p /opt/geld/webapps/nginx-landing-page
+        chown root:root /etc/systemd/system/nginx-landing-page.service
+        chmod  644 /etc/systemd/system/nginx-landing-page.service
 		chown -R root:www-data /opt/geld/webapps/nginx-landing-page
 		chown -R root:www-data /opt/geld/webapps/nginx-landing-page
 		find /opt/geld/webapps/nginx-landing-page -type d -print0 | xargs -0 chmod 755
