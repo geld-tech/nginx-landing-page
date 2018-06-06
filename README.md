@@ -6,10 +6,14 @@
 [![Build Status](https://travis-ci.org/geld-tech/nginx-landing-page.svg?branch=master)](https://travis-ci.org/geld-tech/nginx-landing-page)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+
 ## Description
 
 Landing page for projects served by local nginx reverse proxy.
 
+This tool displays a web portal of the websites, apps, and services, served by the local nginx reverse proxy.
+It presents each with its title, description and screenshot as a snapshot of the status.
+The information is retrieved using Python Selenium and served with Flask.
 
 ## Demo
 
@@ -28,6 +32,11 @@ $ sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com EA3E6BAEB37CF5E4
 ```
 $ sudo apt update
 $ sudo apt clean
+```
+
+* Install package
+```
+$ sudo apt install nginx-landing-page
 ```
 
 * Reload services and start ours
