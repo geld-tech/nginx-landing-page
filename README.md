@@ -1,14 +1,19 @@
-# geldtech-landing-page
+# nginx-landing-page
 
 ## Status
 
-[![Download](https://api.bintray.com/packages/geldtech/debian/geldtech-landing-page/images/download.svg)](https://bintray.com/geldtech/debian/geldtech-landing-page#files)
-[![Build Status](https://travis-ci.org/geld-tech/geldtech-landing-page.svg?branch=master)](https://travis-ci.org/geld-tech/geldtech-landing-page) 
+[![Download](https://api.bintray.com/packages/geldtech/debian/nginx-landing-page/images/download.svg)](https://bintray.com/geldtech/debian/nginx-landing-page#files)
+[![Build Status](https://travis-ci.org/geld-tech/nginx-landing-page.svg?branch=master)](https://travis-ci.org/geld-tech/nginx-landing-page)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Description
 
-Landing page for the projects hosted on <a href="http://www.geld.tech">geld.tech</a>
+Landing page for projects served by local nginx reverse proxy.
+
+
+## Demo
+
+A sample demo of the project is hosted on <a href="http://www.geld.tech">geld.tech</a>.
 
 
 ## Usage
@@ -16,7 +21,7 @@ Landing page for the projects hosted on <a href="http://www.geld.tech">geld.tech
 * Install the repository information and associated GPG key (to ensure authenticity):
 ```
 $ echo "deb https://dl.bintray.com/geldtech/debian /" | sudo tee -a /etc/apt/sources.list.d/geld-tech.list
-$ sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com TODO
+$ sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com EA3E6BAEB37CF5E4
 ```
 
 * Update repository list of available packages and clean already installed versions
@@ -28,8 +33,8 @@ $ sudo apt clean
 * Reload services and start ours
 ```
 $ sudo systemctl daemon-reload
-$ sudo systemctl start geldtech-landing-page
-$ sudo systemctl status geldtech-landing-page
+$ sudo systemctl start nginx-landing-page
+$ sudo systemctl status nginx-landing-page
 ```
 
 ## Settings

@@ -23,7 +23,7 @@ case "$1" in
 		if [ "$IS_UPGRADE" = "true" ]; then
 			echo -n "Restarting service..."
 			systemctl daemon-reload
-			systemctl restart geldtech-landing-page || true
+			systemctl restart nginx-landing-page || true
 			echo " OK"
 			echo -n "Reloading nginx service..."
 			sudo service nginx reload
@@ -31,8 +31,8 @@ case "$1" in
 		else
 			echo -n "Starting service..."
 			systemctl daemon-reload
-			systemctl enable geldtech-landing-page || true
-			systemctl start geldtech-landing-page || true
+			systemctl enable nginx-landing-page || true
+			systemctl start nginx-landing-page || true
 			echo " OK"
 			echo -n "Reloading nginx service..."
 			sudo service nginx reload
