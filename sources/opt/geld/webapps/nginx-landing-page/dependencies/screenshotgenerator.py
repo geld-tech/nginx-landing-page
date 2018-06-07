@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from PIL import Image
 
 def take_screenshot(url, filename="screenshot.png", width="1024", height="768"):
     browser=None
@@ -28,7 +28,19 @@ def take_screenshot(url, filename="screenshot.png", width="1024", height="768"):
             browser.quit()
         return result, title, description
 
-def generate_screenshots(data, file_prefix="screenshot", file_ext="png", dir_path="/tmp"):
+def resize_picture(infile, outfile, file_ext="JPEG", width=128, height=128):
+    im=None
+    success=False
+    try:
+        with Image.open(infile) as im:
+            size = int(width), int(height)
+            im.thumbnail(size, Image.ANTIALIAS)
+            im.save(outfile, file_ext)
+        success=True
+    finally:
+        return success
+
+def generate_screenshots(data, file_prefix="screenshot", file_ext="png", dir_path="/tmp", generate_thumbnails=False, thumb_width=128, thumb_height=128):
     screenshots=[]
     increment=1
     for location in data:
@@ -36,7 +48,14 @@ def generate_screenshots(data, file_prefix="screenshot", file_ext="png", dir_pat
         success, title, description = take_screenshot(data[location], dir_path+"/"+file_path)
         increment += 1
         if success:
-            screenshots.append({"title": title, "description": description, "url": location, "screenshot": file_path})
+            screenshot = {"title": title, "description": description, "url": location, "screenshot": file_path}
+            if generate_thumbnails:
+                    thumb_path = "%s%s-thumb.%s" % (file_prefix, increment, file_ext)
+                    if resize_picture(file_path, thumb_path, file_ext, thumb_width, thumb_height):
+                        screenshot["thumbnail"] = thumb_path
+                    else:
+                        print "Could not create thumb %s" % file_thumb
+            screenshots.append(screenshot)
         else:
             print "Could not create %s" % file_path
     return screenshots
