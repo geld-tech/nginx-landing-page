@@ -1,6 +1,6 @@
 Package: __PACKAGE_NAME__
 Version: __VERSION__
-Depends: bash, python, python-flask, gunicorn, nginx, python-pyparsing, python-selenium, chromium-chromedriver
+Depends: bash, python, python-flask, gunicorn, nginx, python-pyparsing, python-selenium, chromium-chromedriver, python-pil
 Architecture: all
 Maintainer: __USER__
 Description: __PACKAGE_DESC__ (build date: __DATE__)
