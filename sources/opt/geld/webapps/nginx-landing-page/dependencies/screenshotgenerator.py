@@ -1,9 +1,10 @@
 #!/usr/bin/env python
+import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from PIL import Image
 
-def take_screenshot(url, filename="screenshot.png", width="1024", height="768"):
+def take_screenshot(url, filename="screenshot.png", width="1024", height="768", load_time=10):
     browser=None
     result=False
     title=''
@@ -15,9 +16,9 @@ def take_screenshot(url, filename="screenshot.png", width="1024", height="768"):
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--hide-scrollbars")
         chrome_options.add_argument("window-size=%s,%s" % (width, height))
-        browser = webdriver.Chrome(executable_path=chromium_webdriver_path,
-                                chrome_options=chrome_options)
+        browser = webdriver.Chrome(executable_path=chromium_webdriver_path, chrome_options=chrome_options)
         browser.get(url)
+        time.sleep(load_time)
         title = browser.title
         description = browser.find_element_by_xpath("//meta[@name='description']").get_attribute("content")
         result = browser.save_screenshot(filename)
