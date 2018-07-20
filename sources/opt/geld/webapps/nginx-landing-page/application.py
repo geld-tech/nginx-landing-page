@@ -10,7 +10,7 @@ import dependencies.screenshotgenerator as screenshot
 
 
 # Globals
-NGINX_CONFD_FILES="/etc/nginx/conf.d/*.conf"
+NGINX_CONFD_FILES="/etc/geld/nginx.conf.d/*.conf"
 DATA_DIR=os.path.dirname(os.path.realpath(__file__))+"/static/data/"
 DATA_JSON=DATA_DIR+"websites.json"
 
