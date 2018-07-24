@@ -16,7 +16,7 @@ def take_screenshot(url, filename="screenshot.png", width="1024", height="768", 
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-setuid-sandbox")
         chrome_options.add_argument("--disable-gpu")
-        chrome_options.add_argument("--disable-extensions")
+        chrome_options.add_argument('--user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"')
         chrome_options.add_argument("--hide-scrollbars")
         chrome_options.add_argument("window-size=%s,%s" % (width, height))
         browser = webdriver.Chrome(executable_path=chromium_webdriver_path, chrome_options=chrome_options)
