@@ -14,19 +14,25 @@ def take_screenshot(url, filename="screenshot.png", width="1024", height="768", 
         chrome_options = Options()
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-setuid-sandbox")
+        chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--disable-extensions")
         chrome_options.add_argument("--hide-scrollbars")
         chrome_options.add_argument("window-size=%s,%s" % (width, height))
         browser = webdriver.Chrome(executable_path=chromium_webdriver_path, chrome_options=chrome_options)
         browser.get(url)
         time.sleep(load_time)
         title = browser.title
-        description = browser.find_element_by_xpath("//meta[@name='description']").get_attribute("content")
+        if (browser.find_element_by_xpath("//meta[@name='description']")):
+            description = browser.find_element_by_xpath("//meta[@name='description']").get_attribute("content")
         result = browser.save_screenshot(filename)
     except Exception, e:
         print "Exception: %s" % e 
     finally:
         if browser:
+            browser.close()
             browser.quit()
+            del browser
         return result, title, description
 
 def resize_picture(infile, outfile, file_ext="JPEG", width=128, height=128):
