@@ -19,9 +19,21 @@ def take_screenshot(url, filename="screenshot.png", width="1024", height="768", 
         chrome_options.add_argument('--user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"')
         chrome_options.add_argument("--hide-scrollbars")
         chrome_options.add_argument("window-size=%s,%s" % (width, height))
-        browser = webdriver.Chrome(executable_path=chromium_webdriver_path, chrome_options=chrome_options)
+
+        # Chromium and/or WebDriver can become broken during updates or distribution upgrades, for the following packages:
+        #   - chromium-browser
+        #   - chromium-browser-l10n
+        #   - chromium-chromedriver
+        #   - chromium-codecs-ffmpeg-extra
+        #
+        # Tested versions (on Ubuntu 16.04.1 and 16.04.2) are:
+        #   - 65.0.3325.181
+        #   - 66.0.3359.181
+        #
+        browser = webdriver.Chrome(executable_path=chromium_webdriver_path, chrome_options=chrome_options, service_args=["--verbose", "--log-path=/tmp/chromium_webdriver.log"])
         browser.get(url)
         time.sleep(load_time)
+
         title = browser.title
         if (browser.find_element_by_xpath("//meta[@name='description']")):
             description = browser.find_element_by_xpath("//meta[@name='description']").get_attribute("content")
