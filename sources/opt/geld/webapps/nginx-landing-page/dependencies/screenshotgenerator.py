@@ -21,7 +21,8 @@ def take_screenshot(url, filename="screenshot.png", width="1024", height="768", 
         chrome_options.add_argument("window-size=%s,%s" % (width, height))
 
         # Chromium and/or WebDriver can become broken during updates or distribution upgrades.
-        # One of the possible solution to fix these issues was do downgrade the following packages (download .deb files and install locally with `sudo apt install ./chromium-*`):
+        # A solution to fix these issues is to downgrade the following packages,
+        # by downloading .deb files and installing them locally with `sudo apt install ./chromium-*`:
         #   - chromium-browser
         #   - chromium-browser-l10n
         #   - chromium-chromedriver
